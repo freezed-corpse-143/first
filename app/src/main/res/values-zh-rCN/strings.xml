@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">first</string>
+    <string name="btn">开始转换</string>
+    <string name="action_settings">设置</string>
+    <string name="first_fragment_label">首个片段</string>
+    <string name="second_fragment_label">第二个片段</string>
+    <string name="next">下一步</string>
+    <string name="previous">上一步</string>
+    <string name="hello_first_fragment">你好第一页</string>
+    <string name="hello_second_fragment">你好第二页</string>
+    <string name="textshow">转换结果</string>
+    <string name="inputhint">请输入温度</string>
+    <string name="hello">你好</string>
+    <string name="inputrmb">请输入人民币金额</string>
+    <string name="dollar">美元</string>
+    <string name="euro">欧元</string>
+    <string name="won">韩元</string>
+    <string name="courtcounter">积分器</string>
+    <string name="team_b">B队</string>
+    <string name="zero">0</string>
+    <string name="team_a">A队</string>
+    <string name="point1">+1分</string>
+    <string name="point2">+2分</string>
+    <string name="point3">+3分</string>
+    <string name="reset">重置</string>
+    <string name="exchangesrate">汇率</string>
+    <string name="modifyexchange">修改汇率</string>
+    <string name="save">SAVE</string>
+    <string name="unknown">unknown</string>
+</resources>
