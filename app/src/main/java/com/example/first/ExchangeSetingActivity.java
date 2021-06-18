@@ -2,8 +2,11 @@ package com.example.first;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -15,9 +18,9 @@ public class ExchangeSetingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exchange_seting);
 
         Intent intent = getIntent();
-        double dollarrate = intent.getDoubleExtra("dollarrate",0.15);
-        double eurorate = intent.getDoubleExtra("eurorate",0.13);
-        double wonrate = intent.getDoubleExtra("wonrate",170.50);
+        float dollarrate = intent.getFloatExtra("dollarrate",0.15f);
+        float eurorate = intent.getFloatExtra("eurorate",0.13f);
+        float wonrate = intent.getFloatExtra("wonrate",170.50f);
 
         EditText d = findViewById(R.id.editTextTextPersonName2);
         EditText e = findViewById(R.id.editTextTextPersonName3);
@@ -29,24 +32,20 @@ public class ExchangeSetingActivity extends AppCompatActivity {
     }
 
     public void save(View v){
-
-        Bundle bdl = new Bundle();
-
         EditText d = findViewById(R.id.editTextTextPersonName2);
         String dc = d.getText().toString();
         if(dc.equals("")){
             dc ="0.15";
         }
         double dollarrate = Double.valueOf(dc);
-        bdl.putDouble("dollarrate",dollarrate);
 
         EditText e = findViewById(R.id.editTextTextPersonName3);
-        String ec = d.getText().toString();
+        String ec = e.getText().toString();
+//        Log.i("TAG", "save: ec："+ec);
         if(ec.equals("")){
             ec ="0.13";
         }
         double eurorate = Double.valueOf(ec);
-        bdl.putDouble("eurorate",eurorate);
 
         EditText w = findViewById(R.id.editTextTextPersonName4);
         String wc = w.getText().toString();
@@ -54,12 +53,34 @@ public class ExchangeSetingActivity extends AppCompatActivity {
             wc = "170.50";
         }
         double wonrate = Double.valueOf(wc);
+
+        /*
+        Bundle bdl = new Bundle();
+        bdl.putDouble("dollarrate",dollarrate);
+
+
+        bdl.putDouble("eurorate",eurorate);
+
+
         bdl.putDouble("wonrate",wonrate);
+
+//        Log.i("TAG", "save: 返回值"+dollarrate+"  "+eurorate+" "+wonrate);
 
         Intent intent = getIntent();
         intent.putExtras(bdl);
 
+
         setResult(1,intent);
+        finish();*/
+
+        SharedPreferences sp = getSharedPreferences("myrate", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Log.i("TAG", "save: "+dollarrate+" "+eurorate+" "+wonrate);
+        editor.putFloat("dollarrate",(float)dollarrate);
+        editor.putFloat("eurorate",(float)eurorate);
+        editor.putFloat("wonrate",(float)wonrate);
+        editor.apply();
         finish();
+
     }
 }

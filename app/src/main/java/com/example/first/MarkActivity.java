@@ -1,6 +1,7 @@
 package com.example.first;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MarkActivity extends AppCompatActivity{
     TextView scoreA;
     TextView scoreB;
+
+    int score_a;
+    int score_b;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,42 +28,71 @@ public class MarkActivity extends AppCompatActivity{
         Button btn_5 = findViewById(R.id.btn_5);
         Button btn_6 = findViewById(R.id.btn_6);
         Button btn_7 = findViewById(R.id.btn_7);
+
     }
     public void onClick_1(View v){
-        showScoreA(1);
+        addScoreA(1);
+        update();
     }
     public void onClick_2(View v){
-        showScoreA(2);
+        addScoreA(2);
+        update();
     }
     public void onClick_3(View v){
-        showScoreA(3);
+        addScoreA(3);
+        update();
     }
     public void onClick_4(View v){
-        showScoreB(1);
+        addScoreB(1);
+        update();
     }
     public void onClick_5(View v){
-        showScoreB(2);
+        addScoreB(2);
+        update();
     }
     public void onClick_6(View v){
-        showScoreB(3);
+        addScoreB(3);
+        update();
     }
     public void onClick_7(View v){
-        this.scoreA.setText(0+"");
-        this.scoreB.setText(0+"");
+        score_a = 0;
+        score_b = 0;
+        update();
     }
-    public void showScoreA(int scoreA){
+    public void addScoreA(int addscore){
         String content = this.scoreA.getText().toString();
-        if(content == "")
+        if(content.equals(""))
             content = "0";
         int oldScore = Integer.valueOf(content);
-        this.scoreA.setText(scoreA+oldScore+"");
+        score_a = oldScore+addscore;
     }
-    public void showScoreB(int scoreB){
+    public void addScoreB(int addscore){
         String content = this.scoreB.getText().toString();
-        if(content == "")
+        if(content.equals(""))
             content = "0";
         int oldScore = Integer.valueOf(content);
-        this.scoreB.setText(scoreB+oldScore+"");
+        score_b = oldScore + addscore;
     }
+
+    public void update(){
+        scoreA.setText(""+score_a);
+        scoreB.setText(""+score_b);
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt("score_a",score_a);
+        outState.putInt("score_b",score_b);
+        super.onSaveInstanceState(outState);
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        score_a = savedInstanceState.getInt("score_a",0);
+        score_b = savedInstanceState.getInt("score_b",0);
+        update();
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
 
 }
